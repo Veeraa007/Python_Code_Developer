@@ -4,12 +4,6 @@ import pandas as pd
 
 class GISFeatureAnalyzer:
     def __init__(self, workspace, output_csv):
-        """
-        Initialize the GISFeatureAnalyzer with the workspace and output CSV file path.
-        
-        :param workspace: Path to the geodatabase workspace.
-        :param output_csv: Path to save the output CSV file.
-        """
         self.workspace = workspace
         self.output_csv = output_csv
         arcpy.env.workspace = self.workspace
@@ -17,11 +11,6 @@ class GISFeatureAnalyzer:
         self.data = []
 
     def analyze_feature_classes(self, target_fields):
-        """
-        Analyze feature classes in the workspace for specific fields and their unique values.
-
-        :param target_fields: List of target field names to analyze (e.g., ["fclass", "type"]).
-        """
         # Get all feature classes in the workspace
         feature_classes = arcpy.ListFeatureClasses()
         if not feature_classes:
@@ -38,12 +27,7 @@ class GISFeatureAnalyzer:
                     self._process_field(feature_class, field.name)
 
     def _process_field(self, feature_class, field_name):
-        """
-        Process a specific field in a feature class to count unique values.
 
-        :param feature_class: The feature class name.
-        :param field_name: The name of the field to analyze.
-        """
         value_count = {}
 
         try:
@@ -65,9 +49,7 @@ class GISFeatureAnalyzer:
             print(f"Error processing field '{field_name}' in '{feature_class}': {e}")
 
     def save_to_csv(self):
-        """
-        Save the collected data to a CSV file.
-        """
+     
         if not self.data:
             print("No data to save.")
             return
@@ -80,7 +62,6 @@ class GISFeatureAnalyzer:
             print(f"Error saving to CSV: {e}")
 
 
-# Example usage
 if __name__ == "__main__":
     workspace = r"D:\\GIS_Developer_Learnings\\Python\\Wales_UK.gdb"
     output_csv = r"D:\\GIS_Developer_Learnings\\Python\\op9.csv"
